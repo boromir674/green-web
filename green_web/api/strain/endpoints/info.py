@@ -3,9 +3,8 @@ import logging
 from flask import request
 from flask_restplus import Resource
 from green_web.api.restplus import api
-# from green_web.api.strain.parsers import strain_info_arguments, strain_id_parser
-from green_web.api.strain.business import get_strain_info, get_strain_coordinates, create_som, list_maps
-from green_web.api.strain.serializers import base_strain, strain_coordinates, strain_id_model, som_specs_model, map_factory_msg
+from green_web.api.business import get_strain_info, get_strain_coordinates, create_som, list_maps
+from green_web.api.serializers import base_strain, strain_coordinates, strain_id_model, som_specs_model, map_factory_msg
 
 log = logging.getLogger(__name__)
 

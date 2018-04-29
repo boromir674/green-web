@@ -3,20 +3,28 @@ from green_magic import WeedMaster
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+data_dir = os.path.join(basedir, '../../data')
+strains_jl = os.path.join(data_dir, 'strain_jsons_2194_fixed_mixed_frow_info.jl')
 
-data_dir = basedir + '/../../../data'
+print(basedir)
+print(data_dir)
+print(strains_jl)
+
 VARS = ['type', 'effects', 'medical', 'negatives', 'flavors']
 DATASET_ID = 'new-dt'
-WM = WeedMaster(datasets_dir=data_dir, graphs_dir=data_dir + '/figures')
 
-# WM.create_weedataset(os.path.join(basedir, '../../../../../strain_jsons_2194_fixed_mixed_frow_info.jl'), DATASET_ID)
+WM = WeedMaster(datasets_dir=data_dir, graphs_dir=data_dir + '/figures')
 WM.load_dataset(DATASET_ID + '-clean.pk')
-#
+
+# /data/projects/knowfly/green-machine/green-web/green_web/api/../../data/strain_jsons_2194_fixed_mixed_frow_info.jl
+
+# WM.create_weedataset(strains_jl, DATASET_ID)
+
+
 # WM.dt.use_variables(VARS)
 # WM.dt.clean()
 # vectors = WM.get_feature_vectors(WM.dt)
-# WM.get_feature_vectors(WM.dt)
-# dt = wm.load_dataset('./' + wd + '-clean.pk')
+# _ = WM.get_feature_vectors(WM.dt)
 
 # cls = WM.cluster_manager.get_clusters(som, nb_clusters=10)
 # cls.print_clusters(threshold=7, prec=3)
@@ -65,3 +73,27 @@ def mapid2specs(mapid):
             'rows': mapid.split('_')[5],
             'columns': mapid.split('_')[6],
             'initialization': mapid.split('_')[2]}
+
+
+def create_dataset(dataset_specs):
+    # print(strains_jl)
+    # print('/data/projects/knowfly/green-machine/green-web/green_web/api/../../data/strain_jsons_2194_fixed_mixed_frow_info.jl')
+    dt = WM.create_weedataset(strains_jl, dataset_specs['_id'])
+    dt.use_variables(dataset_specs['active_vars'])
+    dt.clean()
+    _ = WM.get_feature_vectors(dt)
+    WM.save_dataset(dataset_specs['_id'])
+    return {
+        'size': len(dt),
+        'active_vars': dt.active_variables,
+        'vec_len': len(dt.datapoints[0])
+    }
+
+
+def load_dataset(dataset_id):
+    WM.load_dataset(dataset_id + '-clean.pk')
+    return {
+        'size': len(WM.dt),
+        'active_vars': WM.dt.active_variables,
+        'vec_len': len(WM.dt.datapoints[0])
+    }

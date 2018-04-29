@@ -53,9 +53,24 @@ som_specs_model = api.model('A Self Organizing Map specifications', {
 strain_coordinates = api.model('A strain\'s coordinates on a self organizing map grid', {
     'map_specs': fields.Nested(som_specs_model),
     'x': fields.Integer(readOnly=True, description='The x coordinate'),
-    'y': fields.Integer(readOnly=True, description='The y coordinate')
+    'y': fields.Integer(readOnly=True, description='The y coordinate'),
 })
 
 map_factory_msg = api.model('Map creation outcome information.', {
     'map_id': fields.String(description='The ID given to the som instance created'),
+})
+
+# dataset_variables = api.model('A set of strain variables', {
+#     'set': fields.List(fields., readOnly=True, description='The set of variables')
+# })
+
+dataset_info = api.model('A Weedataset information', {
+    'size': fields.Integer(readOnly=True, description='The number of datapoints'),
+    'active_vars': fields.List(fields.String, readOnly=True, description='The set of variables'),
+    'vec_len': fields.Integer(readOnly=True, description='The encoded vectors length'),
+})
+
+dataset_specs = api.model('A Weedataset specs model', {
+    '_id': fields.String(readOnly=True, description='The unique identifier of a strain dataset'),
+    'active_vars': fields.List(fields.String, readOnly=True, description='The set of variables', default=['type', 'effects', 'medical', 'negatives', 'flavors'])
 })
