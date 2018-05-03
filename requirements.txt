@@ -1,3 +1,4 @@
+green_magic
 flask
 flask_restplus
-green_magic
+flask_pymongo

@@ -1,20 +1,20 @@
 import logging.config
 
 from flask import Flask, Blueprint
+from flask_pymongo import PyMongo
 
 from green_web.config import env2config
 from green_web.api.restplus import api
 from green_web.api.data.endpoints.info import ns as data_info_ns
 from green_web.api.strain.endpoints.info import ns as strain_info_ns
 
-# from green_web.api.data.endpoints.info import ns as data_info_ns
 
 app = Flask(__name__)
 logging.config.fileConfig('logging.conf')
 log = logging.getLogger(__name__)
 
 
-def configure_app(flask_app, environment='default'):
+def configure_app(flask_app, environment='development'):
     """
     Configures the input app, based on deployment environment, by setting key-value pairs serving as settings.
     :param flask_app: the app
@@ -39,6 +39,7 @@ def initialize_app(flask_app):
 
 def main():
     initialize_app(app)
+    mongo = PyMongo(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     app.run(debug=app.config['DEBUG'])
 

@@ -4,7 +4,6 @@ from datetime import timedelta
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 env2config = {
-    'default': 'DevelopmentConfig',
     'production': 'ProductionConfig',
     'development': 'DevelopmentConfig',
     'testing': 'TestingConfig',
@@ -17,11 +16,9 @@ class BaseConfig(object):
     TESTING = False
     APPLICATION_ROOT = "/api/"
     APP_NAME = 'STRAIN MAP'
-    # URL_PREFIX = '/api/v1.0.0'
-    # HOST='0.0.0.0'
-    # BOOTSWATCH_THEME = "slate"
-    # SQLALCHEMY_ECHO = True # Allow SQLAlchemy to log errors
-    # ADMIN_EMAIL = "your_email@gmail.com"
+    MONGO_DBNAME = 'green-web1'
+    MONGO_URI = 'mongodb://localhost:27017/green-web1'
+
     RESTPLUS_SWAGGER_UI_DOC_EXPANSION = 'list'  # one of :{'none', 'list', 'full'}
     RESTPLUS_VALIDATE = True
     RESTPLUS_MASK_SWAGGER = False  # TODO experiment with True
@@ -52,8 +49,12 @@ class DevelopmentConfig(BaseConfig):
     """Development configurations"""
     SECRET_CONFIG = 'dev-config.py'
     SERVER_NAME = "localhost:5555"
-    # PORT = 5000
     DEBUG = True
+    # URL_PREFIX = '/api/v1.0.0'
+    # HOST='0.0.0.0'
+    # BOOTSWATCH_THEME = "slate"
+    # SQLALCHEMY_ECHO = True # Allow SQLAlchemy to log errors
+    # ADMIN_EMAIL = "your_email@gmail.com"
 
 
 class TestingConfig(BaseConfig):
