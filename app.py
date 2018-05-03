@@ -4,7 +4,10 @@ from flask import Flask, Blueprint
 
 from green_web.config import env2config
 from green_web.api.restplus import api
+from green_web.api.data.endpoints.info import ns as data_info_ns
 from green_web.api.strain.endpoints.info import ns as strain_info_ns
+
+# from green_web.api.data.endpoints.info import ns as data_info_ns
 
 app = Flask(__name__)
 logging.config.fileConfig('logging.conf')
@@ -30,6 +33,7 @@ def initialize_app(flask_app):
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
     api.add_namespace(strain_info_ns)
+    api.add_namespace(data_info_ns)
     flask_app.register_blueprint(blueprint)
 
 
