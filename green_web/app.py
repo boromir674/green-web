@@ -1,17 +1,11 @@
 import logging.config
-
 from flask import Flask, Blueprint
 from flask_pymongo import PyMongo
 
-from green_web.config import env2config
-from green_web.api.restplus import api
-from green_web.api.data.endpoints.info import ns as data_info_ns
-from green_web.api.strain.endpoints.info import ns as strain_info_ns
-
-
-app = Flask(__name__)
-logging.config.fileConfig('logging.conf')
-log = logging.getLogger(__name__)
+from .config import env2config
+from .api.restplus import api
+from .api.data.endpoints.info import ns as data_info_ns
+from .api.strain.endpoints.info import ns as strain_info_ns
 
 
 def configure_app(flask_app, environment='development'):
@@ -37,12 +31,9 @@ def initialize_app(flask_app):
     flask_app.register_blueprint(blueprint)
 
 
-def main():
-    initialize_app(app)
-    mongo = PyMongo(app)
-    log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
-    app.run(debug=app.config['DEBUG'])
-
-
-if __name__ == "__main__":
-    main()
+app = Flask(__name__)
+p = '/data/projects/knowfly/green-machine/green-web/logging.conf'
+logging.config.fileConfig(p)
+logger = logging.getLogger(__name__)
+initialize_app(app)
+mongo = PyMongo(app)
