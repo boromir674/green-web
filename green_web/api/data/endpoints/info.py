@@ -31,3 +31,18 @@ class DatasetLoader(Resource):
     def get(self, dataset_id):
         """Load a Strain dataset given id"""
         return load_dataset(dataset_id)
+
+# @ns.route('/strain/<string:strain_id>')
+# @ns.route('/strain/<strain_id>')
+#
+# class StrainFetcher(Resource):
+#     # @api.doc(responses={404: 'Strain not found'}, params={'strain_id': 'The Strain ID'})
+#     def get(self, strain_id):
+#         """Fetch a strain given id"""
+#         return {}
+
+        # def user_profile(username):
+        #     user = mongo.db.users.find_one_or_404({'_id': username})
+        #     return render_template('user.html',
+        #         user=user)
+
