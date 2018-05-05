@@ -6,6 +6,7 @@ from .config import env2config
 from .api.restplus import api
 from .api.data.endpoints.info import ns as data_info_ns
 from .api.strain.endpoints.info import ns as strain_info_ns
+# from .api.business import mongo as db
 
 
 def configure_app(flask_app, environment='development'):
@@ -31,9 +32,15 @@ def initialize_app(flask_app):
     flask_app.register_blueprint(blueprint)
 
 
-app = Flask(__name__)
+def init_app():
+    appl = Flask(__name__)
+    # db.init_app(appl)
+    return appl
+
+
+app = init_app()
 p = '/data/projects/knowfly/green-machine/green-web/logging.conf'
 logging.config.fileConfig(p)
 logger = logging.getLogger(__name__)
 initialize_app(app)
-mongo = PyMongo(app)
+

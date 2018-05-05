@@ -1,35 +1,6 @@
 from flask_restplus import fields
 from green_web.api.restplus import api
 
-blog_post = api.model('Blog post', {
-    'id': fields.Integer(readOnly=True, description='The unique identifier of a blog post'),
-    'title': fields.String(required=True, description='Article title'),
-    'body': fields.String(required=True, description='Article content'),
-    'pub_date': fields.DateTime,
-    'category_id': fields.Integer(attribute='category.id'),
-    'category': fields.String(attribute='category.id'),
-})
-
-pagination = api.model('A page of results', {
-    'page': fields.Integer(description='Number of this page of results'),
-    'pages': fields.Integer(description='Total number of pages of results'),
-    'per_page': fields.Integer(description='Number of items per page of results'),
-    'total': fields.Integer(description='Total number of results'),
-})
-
-page_of_blog_posts = api.inherit('Page of blog posts', pagination, {
-    'items': fields.List(fields.Nested(blog_post))
-})
-
-category = api.model('Blog category', {
-    'id': fields.Integer(readOnly=True, description='The unique identifier of a blog category'),
-    'name': fields.String(required=True, description='Category name'),
-})
-
-category_with_posts = api.inherit('Blog category with posts', category, {
-    'posts': fields.List(fields.Nested(blog_post))
-})
-
 base_strain = api.model('A cannabis strain information', {
     '_id': fields.String(readOnly=True, description='The unique identifier of a strain'),
     'name': fields.String(description='Name of the cannabis strain'),
@@ -37,8 +8,34 @@ base_strain = api.model('A cannabis strain information', {
     'flavors': fields.List(fields.String, description='The mixture of flavors the strain contains')
 })
 
-strain_id_model = api.model('A cannabis strain ID', {
-    'id': fields.String(readOnly=True, description='The unique identifier of a strain', default='silver-haze'),
+dataset_info = api.model('A Weedataset information', {
+    'size': fields.Integer(readOnly=True, description='The number of datapoints'),
+    'active_vars': fields.List(fields.String, readOnly=True, description='The set of variables'),
+    'vec_len': fields.Integer(readOnly=True, description='The encoded vectors length'),
+})
+
+dataset_specs = api.model('A Weedataset specs model', {
+    '_id': fields.String(readOnly=True, description='The unique identifier of a strain dataset'),
+    'active_vars': fields.List(fields.String, readOnly=True, description='The set of variables', default=['type', 'effects', 'medical', 'negatives', 'flavors'])
+})
+
+# dataset_variables = api.model('A set of strain variables', {
+#     'set': fields.List(fields., readOnly=True, description='The set of variables')
+# })
+
+# pagination = api.model('A page of results', {
+#     'page': fields.Integer(description='Number of this page of results'),
+#     'pages': fields.Integer(description='Total number of pages of results'),
+#     'per_page': fields.Integer(description='Number of items per page of results'),
+#     'total': fields.Integer(description='Total number of results'),
+# })
+#
+# page_of_blog_posts = api.inherit('Page of blog posts', pagination, {
+#     'items': fields.List(fields.Nested(blog_post))
+# })
+
+map_factory_msg = api.model('Map creation outcome information.', {
+    'map_id': fields.String(description='The ID given to the som instance created'),
 })
 
 som_specs_model = api.model('A Self Organizing Map specifications', {
@@ -56,21 +53,8 @@ strain_coordinates = api.model('A strain\'s coordinates on a self organizing map
     'y': fields.Integer(readOnly=True, description='The y coordinate'),
 })
 
-map_factory_msg = api.model('Map creation outcome information.', {
-    'map_id': fields.String(description='The ID given to the som instance created'),
+strain_id_model = api.model('A cannabis strain ID', {
+    'id': fields.String(readOnly=True, description='The unique identifier of a strain', default='silver-haze'),
 })
 
-# dataset_variables = api.model('A set of strain variables', {
-#     'set': fields.List(fields., readOnly=True, description='The set of variables')
-# })
 
-dataset_info = api.model('A Weedataset information', {
-    'size': fields.Integer(readOnly=True, description='The number of datapoints'),
-    'active_vars': fields.List(fields.String, readOnly=True, description='The set of variables'),
-    'vec_len': fields.Integer(readOnly=True, description='The encoded vectors length'),
-})
-
-dataset_specs = api.model('A Weedataset specs model', {
-    '_id': fields.String(readOnly=True, description='The unique identifier of a strain dataset'),
-    'active_vars': fields.List(fields.String, readOnly=True, description='The set of variables', default=['type', 'effects', 'medical', 'negatives', 'flavors'])
-})

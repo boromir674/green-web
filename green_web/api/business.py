@@ -1,7 +1,9 @@
 import os
+from flask_pymongo import PyMongo
 from green_magic import WeedMaster
 
 
+mongo = PyMongo()
 basedir = os.path.abspath(os.path.dirname(__file__))
 data_dir = os.path.join(basedir, '../../data')
 strains_jl = os.path.join(data_dir, 'strain_jsons_2194_fixed_mixed_frow_info.jl')
