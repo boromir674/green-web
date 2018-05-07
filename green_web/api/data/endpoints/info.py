@@ -6,6 +6,8 @@ from green_web.api.restplus import api
 from green_web.api.business import create_dataset, load_dataset
 from green_web.api.serializers import dataset_specs, dataset_info
 
+# from green_web.api.serializers import base_strain
+
 log = logging.getLogger(__name__)
 
 ns = api.namespace('data', description='Data operations related to cannabis strains')
@@ -32,17 +34,12 @@ class DatasetLoader(Resource):
         """Load a Strain dataset given id"""
         return load_dataset(dataset_id)
 
+
 # @ns.route('/strain/<string:strain_id>')
-# @ns.route('/strain/<strain_id>')
-#
+# @api.doc(responses={404: 'Strain not found'}, params={'strain_id': 'The Strain ID'})
 # class StrainFetcher(Resource):
-#     # @api.doc(responses={404: 'Strain not found'}, params={'strain_id': 'The Strain ID'})
+#
+#     @api.marshal_with(base_strain)
 #     def get(self, strain_id):
 #         """Fetch a strain given id"""
-#         return {}
-
-        # def user_profile(username):
-        #     user = mongo.db.users.find_one_or_404({'_id': username})
-        #     return render_template('user.html',
-        #         user=user)
-
+#         return mongo.db.strains1.find_one_or_404({'_id': strain_id})
