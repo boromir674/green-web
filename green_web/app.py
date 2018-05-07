@@ -1,6 +1,5 @@
 import logging.config
 from flask import Flask, Blueprint
-from flask_pymongo import PyMongo
 
 from .config import env2config
 from .api.restplus import api
