@@ -2,4 +2,3 @@ green_magic
 flask
 flask_restplus
 flask_pymongo
-Flask-Testing==0.4

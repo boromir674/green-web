@@ -27,7 +27,7 @@ setup(
     author_email='k.lampridis@hotmail.com',
     license='GNU GPLv3',
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
-    install_requires=['green_magic', 'flask', 'flask_restplus', 'flask_pymongo', 'Flask-Testing'],
+    install_requires=['green_magic', 'flask', 'flask_restplus', 'flask_pymongo'],
     include_package_data=True,
     test_suite='green_web.tests',
     zip_safe=False
