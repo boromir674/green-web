@@ -5,9 +5,11 @@ python:
 
 before_install:
   - chmod +x green_web/tests/test_server.py
+  - chmod +x install-nltk-resources.py
 
 install:
   - pip install .
 
 script:
+  - python install-nltk-resources.py
   - python green_web/tests/test_server.py
