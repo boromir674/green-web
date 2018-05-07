@@ -1,9 +1,8 @@
 import os
-import sys
+# import sys
 import json
 import unittest
-import tempfile
-import requests
+# import tempfile
 from random import randint
 
 from green_web import green_app
@@ -78,9 +77,7 @@ class FlaskrTestCase(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main(verbosity=0)
 
-
     # dictToSend = self.map_specs
     # res = requests.post('http://localhost:5555/api/strain/map', json=self.map_specs)
     # print('response from server:', res.text)
     # dictFromServer = res.json()
-    # mpeta = json.dumps(self.map_specs)
