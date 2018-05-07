@@ -56,5 +56,3 @@ strain_coordinates = api.model('A strain\'s coordinates on a self organizing map
 strain_id_model = api.model('A cannabis strain ID', {
     'id': fields.String(readOnly=True, description='The unique identifier of a strain', default='silver-haze'),
 })
-
-

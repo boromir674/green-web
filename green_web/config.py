@@ -48,7 +48,7 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     """Development configurations"""
     SECRET_CONFIG = 'dev-config.py'
-    SERVER_NAME = "localhost:5555"
+    SERVER_NAME = "localhost:5556"
     DEBUG = True
     # URL_PREFIX = '/api/v1.0.0'
     # HOST='0.0.0.0'
@@ -60,7 +60,7 @@ class DevelopmentConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     """Testing configurations"""
     SECRET_CONFIG = 'test-config.py'
-    SERVER_NAME = "localhost:5555"
+    SERVER_NAME = "localhost:5556"
     TESTING = True
 
 

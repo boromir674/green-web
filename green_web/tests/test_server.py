@@ -52,15 +52,16 @@ class FlaskrTestCase(unittest.TestCase):
         self.assertEqual(data['name'], 'amnesia')
         self.assertEqual(data['type'], 'sativa')
 
-    # def test_map_creation_endpoint(self):
-    #     dictToSend = self.map_specs
-    #     res = requests.post('http://localhost:5555/api/strain/map', json=dictToSend)
-    #     print('response from server:', res.text)
-    #     dictFromServer = res.json()
-    #     # response = self.app.post('/api/strain/map', data=self.ms0, follow_redirects=True)
-    #     # data = json.loads(response.get_data(as_text=True))
-    #     self.assertIn('map_id', dictFromServer)
-    #     self.assertEqual(dictFromServer['map_id'], self.map_id)
+    def test_map_creation_endpoint(self):
+        # dictToSend = self.map_specs
+        # res = requests.post('http://localhost:5555/api/strain/map', json=self.map_specs)
+        # print('response from server:', res.text)
+        # dictFromServer = res.json()
+        # mpeta = json.dumps(self.map_specs)
+        response = self.app.post('/api/strain/map', data=json.dumps(self.map_specs), headers={"Content-Type": "application/json"})
+        data = json.loads(response.get_data(as_text=True))
+        self.assertIn('map_id', data)
+        self.assertEqual(data['map_id'], self.map_id)
 
 
 if __name__ == '__main__':
