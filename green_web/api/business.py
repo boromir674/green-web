@@ -4,17 +4,16 @@ from green_web.config import TestingConfig
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# basedir = os.path.abspath('~')
 data_dir = os.path.join(basedir, '../../data')
-figures_dir = os.path.join(data_dir, 'figures')
+# figures_dir = os.path.join(data_dir, 'figures')
 strains_jl = os.path.join(data_dir, 'strain_jsons_2194_fixed_mixed_frow_info.jl')
 
-VARS = ['type', 'effects', 'medical', 'negatives', 'flavors']
+WM = WeedMaster()
+
+# VARS = ['type', 'effects', 'medical', 'negatives', 'flavors']
 
 # if not os.path.isdir(figures_dir):
 #     os.makedirs(figures_dir)
-
-WM = WeedMaster()
 
 # WM.create_weedataset(strains_jl, DATASET_ID)
 

@@ -1,3 +1,4 @@
+import os
 import logging.config
 from flask import Flask, Blueprint
 
@@ -5,7 +6,8 @@ from .config import env2config
 from .api.restplus import api
 from .api.data.endpoints.info import ns as data_info_ns
 from .api.strain.endpoints.info import ns as strain_info_ns
-# from .api.business import mongo as db
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 def configure_app(flask_app, environment='development'):
@@ -48,7 +50,7 @@ def initialize_app(flask_app, environment):
 
 def get_logger_n_app(environment='development'):
     app = Flask(__name__)
-    p = '/data/projects/knowfly/green-machine/green-web/logging.conf'
+    p = os.path.join(basedir, '../logging.conf')
     logging.config.fileConfig(p)
     logger = logging.getLogger(__name__)
     initialize_app(app, environment)

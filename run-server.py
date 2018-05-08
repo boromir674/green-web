@@ -1,7 +1,7 @@
 import argparse
 
 from green_web import get_logger_n_app
-import logging.config
+# import logging.config
 
 
 def get_cl_arguments():
