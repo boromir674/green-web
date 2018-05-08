@@ -17,8 +17,8 @@ class FlaskrTestCase(unittest.TestCase):
     def setUp(self):
         # self.db_fd, green_app.config['DATABASE'] = tempfile.mkstemp()
         self.app = app.test_client()
-        self.strain_id1 = 'amnesia'
-        self.strain_id2 = 'silver-haze'
+        self.strain_id1 = 'blueberry-og'
+        self.strain_id2 = 'sour-lemon-og'
         self.map_specs1 = {
             'columns': 5,
             'grid': 'hexagonal',
@@ -50,9 +50,9 @@ class FlaskrTestCase(unittest.TestCase):
         self.assertIn('flavors', data)
         self.assertIn('name', data)
         self.assertIn('type', data)
-        self.assertEqual(data['flavors'], ['Earthy', 'Sweet', 'Pungent'])
-        self.assertEqual(data['name'], 'amnesia')
-        self.assertEqual(data['type'], 'sativa')
+        self.assertEqual(data['flavors'], ['Blueberry', 'Earthy', 'Berry'])
+        self.assertEqual(data['name'], 'blueberry-og')
+        self.assertEqual(data['type'], 'hybrid')
 
     def test_map_creation_endpoint(self):
         response = self.app.post('/api/strain/map', data=json.dumps(self.map_specs2), headers={"Content-Type": "application/json"})

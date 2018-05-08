@@ -64,9 +64,9 @@ class TestingConfig(BaseConfig):
     SECRET_CONFIG = 'test-config.py'
     SERVER_NAME = "localhost:5556"
     TESTING = True
-    DEBUG = True
-    DATASET_ID = 'new-dt'
-    DATASETS_DIR = os.path.join(basedir, '../data')
+    # DEBUG = True
+    DATASET_ID = 'unittest-dt'
+    DATASETS_DIR = os.path.join(basedir, 'tests')
 
 
 class ProductionConfig(BaseConfig):
