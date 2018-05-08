@@ -15,7 +15,6 @@ def configure_app(flask_app, environment='development'):
     :param environment:
     :type environment: one of {'default', 'development', 'testing', 'production'}
     """
-    # TODO use config file with inheritance according to environment
     flask_app.config.from_object('green_web.config.' + env2config[environment])
     print('config.' + env2config[environment])
     # flask_app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
@@ -28,6 +27,9 @@ def initialize_app(flask_app, environment):
     api.init_app(blueprint)
     api.add_namespace(strain_info_ns)
     api.add_namespace(data_info_ns)
+    from .api.business import WM
+    WM.datasets_dir = flask_app.config['DATASETS_DIR']
+    WM.load_dataset(flask_app.config['DATASET_ID'] + '-clean.pk')
     flask_app.register_blueprint(blueprint)
 
 

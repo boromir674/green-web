@@ -33,12 +33,9 @@ class FlaskrTestCase(unittest.TestCase):
             'rows': 8,
             'type': 'planar'
         }
-        # TODO decouple the 'new-dt' component of the id
-        self.map_id1 = 'somoclu_new-dt_pca_toroid_hexagonal_7_5'
-        self.map_id2 = 'somoclu_new-dt_random_planar_rectangular_8_4'
-        _ = self.app.post('/api/strain/map', data=json.dumps(self.map_specs1), headers={"Content-Type": "application/json"})
-        # data = json.loads(response.get_data(as_text=True))
-        # self.map_id2 = "somoclu_new-dt_pca_toroid_rectangular_20_10"
+        self.map_id1 = 'somoclu_' + app.config['DATASET_ID'] + '_pca_toroid_hexagonal_7_5'
+        self.map_id2 = 'somoclu_' + app.config['DATASET_ID'] + '_random_planar_rectangular_8_4'
+        _ = self.app.post('/api/strain/map', data=json.dumps(self.map_specs1))  # , headers={"Content-Type": "application/json"}
         # with green_app.app_context():
         #     flaskr.init_db()
 

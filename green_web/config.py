@@ -50,12 +50,13 @@ class DevelopmentConfig(BaseConfig):
     SECRET_CONFIG = 'dev-config.py'
     SERVER_NAME = "localhost:5556"
     DEBUG = True
+    DATASET_ID = 'new-dt'
+    DATASETS_DIR = os.path.join(basedir, '../data')
     # URL_PREFIX = '/api/v1.0.0'
     # HOST='0.0.0.0'
     # BOOTSWATCH_THEME = "slate"
     # SQLALCHEMY_ECHO = True # Allow SQLAlchemy to log errors
     # ADMIN_EMAIL = "your_email@gmail.com"
-
 
 
 class TestingConfig(BaseConfig):
@@ -64,6 +65,9 @@ class TestingConfig(BaseConfig):
     SERVER_NAME = "localhost:5556"
     TESTING = True
     DEBUG = True
+    DATASET_ID = 'new-dt'
+    DATASETS_DIR = os.path.join(basedir, '../data')
+
 
 class ProductionConfig(BaseConfig):
     """Production configurations"""

@@ -1,5 +1,6 @@
 import os
 from green_magic import WeedMaster
+from green_web.config import TestingConfig
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -9,13 +10,11 @@ figures_dir = os.path.join(data_dir, 'figures')
 strains_jl = os.path.join(data_dir, 'strain_jsons_2194_fixed_mixed_frow_info.jl')
 
 VARS = ['type', 'effects', 'medical', 'negatives', 'flavors']
-DATASET_ID = 'new-dt'
 
-if not os.path.isdir(figures_dir):
-    os.makedirs(figures_dir)
+# if not os.path.isdir(figures_dir):
+#     os.makedirs(figures_dir)
 
-WM = WeedMaster(datasets_dir=data_dir, graphs_dir=figures_dir)
-WM.load_dataset(DATASET_ID + '-clean.pk')
+WM = WeedMaster()
 
 # WM.create_weedataset(strains_jl, DATASET_ID)
 
