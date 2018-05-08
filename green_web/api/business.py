@@ -1,8 +1,9 @@
 import os
 from green_magic import WeedMaster
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-basedir = os.path.abspath('~')
+# basedir = os.path.abspath('~')
 data_dir = os.path.join(basedir, '../../data')
 figures_dir = os.path.join(data_dir, 'figures')
 strains_jl = os.path.join(data_dir, 'strain_jsons_2194_fixed_mixed_frow_info.jl')

@@ -1,22 +1,22 @@
 import os
-# import sys
 import json
 import unittest
 # import tempfile
 from random import randint
 
-from green_web import green_app
+from green_web import get_logger_n_app
 
 # Random order for tests runs. (Original is: -1 if x<y, 0 if x==y, 1 if x>y).
 unittest.TestLoader.sortTestMethodsUsing = lambda _, x, y: randint(-1, 1)
+
+log, app = get_logger_n_app(environment='testing')
 
 
 class FlaskrTestCase(unittest.TestCase):
 
     def setUp(self):
         # self.db_fd, green_app.config['DATABASE'] = tempfile.mkstemp()
-        green_app.testing = True
-        self.app = green_app.test_client()
+        self.app = app.test_client()
         self.strain_id1 = 'amnesia'
         self.strain_id2 = 'silver-haze'
         self.map_specs1 = {

@@ -22,8 +22,8 @@ def configure_app(flask_app, environment='development'):
     # flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = settings.SQLALCHEMY_TRACK_MODIFICATIONS
 
 
-def initialize_app(flask_app):
-    configure_app(flask_app)
+def initialize_app(flask_app, environment):
+    configure_app(flask_app, environment=environment)
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
     api.add_namespace(strain_info_ns)
@@ -31,15 +31,23 @@ def initialize_app(flask_app):
     flask_app.register_blueprint(blueprint)
 
 
-def init_app():
-    appl = Flask(__name__)
-    # db.init_app(appl)
-    return appl
+# def init_app():
+#     appl = Flask(__name__)
+#     db.init_app(appl)
+#     return appl
 
 
-app = init_app()
-p = '/data/projects/knowfly/green-machine/green-web/logging.conf'
-logging.config.fileConfig(p)
-logger = logging.getLogger(__name__)
-initialize_app(app)
+# app = init_app()
+# p = '/data/projects/knowfly/green-machine/green-web/logging.conf'
+# logging.config.fileConfig(p)
+# logger = logging.getLogger(__name__)
+# initialize_app(app)
 
+
+def get_logger_n_app(environment='development'):
+    app = Flask(__name__)
+    p = '/data/projects/knowfly/green-machine/green-web/logging.conf'
+    logging.config.fileConfig(p)
+    logger = logging.getLogger(__name__)
+    initialize_app(app, environment)
+    return logger, app

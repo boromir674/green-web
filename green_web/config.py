@@ -57,12 +57,13 @@ class DevelopmentConfig(BaseConfig):
     # ADMIN_EMAIL = "your_email@gmail.com"
 
 
+
 class TestingConfig(BaseConfig):
     """Testing configurations"""
     SECRET_CONFIG = 'test-config.py'
     SERVER_NAME = "localhost:5556"
     TESTING = True
-
+    DEBUG = True
 
 class ProductionConfig(BaseConfig):
     """Production configurations"""

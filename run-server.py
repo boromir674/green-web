@@ -1,6 +1,6 @@
 import argparse
 
-from green_web import green_logger, green_app
+from green_web import get_logger_n_app
 import logging.config
 
 
@@ -15,5 +15,6 @@ def get_cl_arguments():
 
 if __name__ == '__main__':
     # logger.info('>>>>> Using {} environment configuration <<<<<'.format(green_app.config['SERVER_NAME']))
-    green_logger.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(green_app.config['SERVER_NAME']))
-    green_app.run(debug=green_app.config['DEBUG'])
+    logger, app = get_logger_n_app(environment='development')
+    logger.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
+    app.run(debug=app.config['DEBUG'])
